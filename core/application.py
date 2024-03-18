@@ -79,6 +79,8 @@ class Application(EventHandler):
             self.on_update(delta_time)
 
             # RENDERING
+            # Clear
+            self.window.clear((0, 0, 0))
             # Render entities
             for id, entity in self.entities.items():
                 entity.render()

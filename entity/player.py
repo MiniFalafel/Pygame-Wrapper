@@ -2,7 +2,7 @@ import pygame
 
 from entity.entity import Entity
 from physics.solver import Solver
-from physics.rigidbody import Rigidbody
+from physics.force import Force, ForceType
 from rendering.spritelib import SpriteLibrary
 from core.application import Application
 
@@ -40,9 +40,16 @@ class Player(Entity):
 
 
         #print(move_dir)
-        m = 50 * dt
-        self.pos[0] += move_dir[0] * m
-        self.pos[1] += move_dir[1] * m
+        # self.pos[0] += move_dir[0] * m
+        # self.pos[1] += move_dir[1] * m
+        m = 15000 * dt
+        move_dir[0] = float(move_dir[0]) * m
+        move_dir[1] = float(move_dir[1]) * m
+        counter_vel = self.rigidbody.get_velocity()[0] * -7000.0
+
+        move_dir[0] += counter_vel
+
+        self.rigidbody.add_force(Force(move_dir, ForceType.ACCELERATE))
 
         #print(self.pos)
 

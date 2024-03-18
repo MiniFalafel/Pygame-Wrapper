@@ -17,6 +17,9 @@ class Window:
         # Create our rendering surface (account for upscaling)
         self.display = pygame.Surface((self.win_data.size[0] // self.win_data.upscaling, self.win_data.size[1] // self.win_data.upscaling))
 
+    def clear(self, color: tuple[int, int, int]):
+        self.display.fill(color)
+
     def update_display(self):
         # Update pygame display
         pygame.display.update()

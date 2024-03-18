@@ -18,6 +18,9 @@ class Rigidbody(EntityComponent):
         # Initialize forces
         self.forces = []
 
+    def get_velocity(self):
+        return [self.pos[i] - self.last_frame_pos[i] for i in range(2)]
+
     def add_force(self, force: Force):
         self.forces.append(force)
 

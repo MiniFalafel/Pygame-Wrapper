@@ -39,7 +39,7 @@ class Solver:
     def update_positions(dt: float):
         for body in Solver._s_Rigidbodies:
             # calculate velocity from current pos and last frame's pos
-            vel = [body.pos[i] - body.last_frame_pos[i] for i in range(2)]
+            vel = body.get_velocity()
 
             # Update self.last_frame_pos
             body.last_frame_pos = list(body.pos)
@@ -50,11 +50,6 @@ class Solver:
             # Verlet integrate: pos += vel * acc * dt^2
             body.pos[1] += vel[1] + acc[1] * dt * dt
             body.pos[0] += vel[0] + acc[0] * dt * dt
-
-            # dumb temportary constraint
-            if body.pos[1] > 210:
-                body.pos[1] = 0
-                body.last_frame_pos[1] = 0
 
     @staticmethod
     def update(dt: float):
