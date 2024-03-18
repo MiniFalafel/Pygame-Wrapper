@@ -1,17 +1,18 @@
 import pygame
 
 from entity.entity import Entity
+from physics.solver import Solver
 from physics.rigidbody import Rigidbody
 from rendering.spritelib import SpriteLibrary
 from core.application import Application
 
 class Player(Entity):
-    def __init__(self, pos: tuple[float, float], sprite_path: str):
+    def __init__(self, pos: list[float, float], sprite_path: str):
         # Parent constructor
         super().__init__("PLAYER", pos)
 
         # Add a rigidbody component
-        self.rigidbody = Rigidbody(1.0, self.pos, (0, 0))
+        self.rigidbody = Solver.create_rigidbody(1.0, self.pos, (0, 0))
         self.add_component(self.rigidbody)
 
         # Sprite

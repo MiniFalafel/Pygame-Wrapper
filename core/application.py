@@ -3,6 +3,7 @@ import sys
 from core.window import Window
 from core.event_handler import EventHandler
 from entity.entity import Entity
+from physics.solver import Solver
 
 # APP PREFERENCES
 FRAME_RATE = 60
@@ -39,9 +40,9 @@ class Application(EventHandler):
     def pop_entity(self, entity_id: int):
         return self.entities.pop(entity_id)
 
-    def user_update(self, dt):
+    def on_update(self, dt):
         pass
-    def user_render(self):
+    def on_render(self):
         pass
 
     def run(self):
@@ -72,15 +73,17 @@ class Application(EventHandler):
             # Update entities
             for id, entity in self.entities.items():
                 entity.update(delta_time)
+            # Update Physics solver
+            Solver.update(delta_time)
             # User update
-            self.user_update(delta_time)
+            self.on_update(delta_time)
 
             # RENDERING
             # Render entities
             for id, entity in self.entities.items():
                 entity.render()
             # User draw
-            self.user_render()
+            self.on_render()
 
             # Display window to the screen
             self.window.render()

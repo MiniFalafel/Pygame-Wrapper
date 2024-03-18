@@ -3,7 +3,7 @@ from entity.entity_component import ComponentList, EntityComponent
 from core.event_handler import EventHandler
 
 class Entity(EventHandler):
-    def __init__(self, name: str, pos: tuple[float, float]):
+    def __init__(self, name: str, pos: list[float, float]):
         self.name = name
         self.pos = list(pos)
         self.components = ComponentList()
